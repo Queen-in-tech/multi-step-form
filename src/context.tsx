@@ -10,11 +10,19 @@ type billingPropType ={
     yearly: boolean
     billingType: {
         type: string
-        amount:string
+        amount: number
     }
+    checked: [
+        {
+            status: boolean
+            tiile: string
+            amount: number
+        }
+    ]
     setBillingType: (value: {type:string, amount:string}) => void
     setMonthly: (value: boolean) => void
     setYearly: (value: boolean) => void
+    setChecked: (value: [{status: boolean, title: string, amount: number}]) => void
 }
 
 type actionType =
@@ -89,10 +97,21 @@ const FormProvider = ({children}: { children: React.ReactNode }) => {
     const [yearly, setYearly] = useState(false)
     const [billingType, setBillingType] = useState({
         type: "Arcade",
-        amount: "90/yr"
+        amount: monthly ? 9 : 90
     })
+    const [checked, setChecked] = useState([
+       {status:true,
+        amount: monthly ? 1 : 10,
+        title: "Online service"}, 
+        {status:true,
+        amount: monthly ? 2 : 20,
+        title: "Larger storage"},
+        {status:false,
+        amount: monthly ? 1 : 10,
+        title: "Customizable profile"}
+      ])
 
-    const billing = { monthly, yearly, setMonthly, setYearly, billingType, setBillingType}
+    const billing = { monthly, yearly, setMonthly, setYearly, billingType, setBillingType, checked, setChecked}
     
 
     

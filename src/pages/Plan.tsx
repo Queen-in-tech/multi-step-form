@@ -1,11 +1,10 @@
 import SideBar from "../components/SideBar"
-import {useNavigate, Link} from "react-router-dom"
+import {Link} from "react-router-dom"
 import {useContext, useState} from "react"
 import { FormContext } from "../context"
 
 
 const Plan = () => {
-const navigate = useNavigate()
 const {billing} = useContext(FormContext)
 const {monthly, setMonthly, yearly, setYearly, setBillingType} = billing
 const [selected, setSelected] = useState([
@@ -29,7 +28,7 @@ const [selected, setSelected] = useState([
                 () => {
                     setBillingType({
                     type: "Arcade",
-                    amount: monthly ? "9/mo" : "90/yr"
+                    amount: monthly ? 9 : 90
                   })
                   setSelected([
                     {first: true},
@@ -50,7 +49,7 @@ const [selected, setSelected] = useState([
                 () => {
                     setBillingType({
                     type: "Advanced",
-                    amount: monthly ? "12/mo" : "120/yr"
+                    amount: monthly ? 12 : 120
                   })
                   setSelected([
                     {first: false},
@@ -71,7 +70,7 @@ const [selected, setSelected] = useState([
                 () => {
                     setBillingType({
                     type: "Pro",
-                    amount: monthly ? "15/mo" : "150/yr"
+                    amount: monthly ? 15 : 150
                   })
                   setSelected([
                     {first: false},
@@ -104,13 +103,13 @@ const [selected, setSelected] = useState([
             </div>
             <div className="hidden md:flex justify-between items-center md:mt-16 lg:mt-24">
             <Link to="/" className="text-gray-500">Go back</Link>
-            <button className="bg-blue-950 rounded-md px-8 py-3 text-white hover:opacity-90" onClick={() => navigate("/add-on")}>Next Step</button>
-          </div>
+            <Link to="/add-on" className="bg-blue-950 rounded-md px-8 py-3 text-white hover:opacity-90">Next Step</Link>
+            </div>
         </div>
       </div>
       <div className="bg-white py-4 px-6 flex justify-between items-center md:hidden">
             <Link to="/" className="text-gray-500">Go back</Link>
-            <button className="bg-blue-950 rounded-md text-white px-8 py-3 hover:opacity-90" onClick={() => navigate("/add-on")}>Next Step</button>
+            <Link to="/add-on" className="bg-blue-950 rounded-md px-8 py-3 text-white hover:opacity-90">Next Step</Link>
         </div>
     </div>
   )
