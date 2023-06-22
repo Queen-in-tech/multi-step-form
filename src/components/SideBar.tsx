@@ -31,7 +31,7 @@ const SideBar = () => {
       </div>
 
       <div className="flex gap-4 justify-start items-center">
-        <p className={`font-bold h-10 w-10 text-center rounded-full ${location.pathname === "/summary" ? "text-black py-2 bg-blue-200" : "text-white py-1 border-2 border-blue-200"}`}>4</p>
+        <p className={`font-bold h-10 w-10 text-center rounded-full ${location.pathname === "/summary" || location.pathname === "/thank-you" ? "text-black py-2 bg-blue-200" : "text-white py-1 border-2 border-blue-200"}`}>4</p>
         <div className="hidden md:block">
             <p className="uppercase text-white/60 text-sm">step 4</p>
             <p className="uppercase text-white font-medium">summary</p>

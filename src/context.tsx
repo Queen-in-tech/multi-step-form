@@ -12,17 +12,16 @@ type billingPropType ={
         type: string
         amount: number
     }
-    checked: [
-        {
-            status: boolean
-            tiile: string
-            amount: number
-        }
-    ]
-    setBillingType: (value: {type:string, amount:string}) => void
-    setMonthly: (value: boolean) => void
-    setYearly: (value: boolean) => void
-    setChecked: (value: [{status: boolean, title: string, amount: number}]) => void
+    checked: {status: boolean, title: string, amount: number}[]
+    setBillingType: (billingType: {
+        type: string
+        amount: number
+    }) => void
+    setMonthly: (monthly: boolean) => void
+    setYearly: (yearly: boolean) => void
+    setChecked: ( 
+    checked: {status:boolean, title: string, amount: number}[]
+    ) => void
 }
 
 type actionType =
@@ -37,13 +36,12 @@ type actionType =
 type FormContextType = {
     state: formPropType;
     dispatch: Dispatch<actionType>;
-    billing: billingPropType;
 };
 
 import React, { createContext, useReducer, Dispatch , useState} from "react";
 
 
-const FormContext = createContext<FormContextType| null>(null);
+const FormContext = createContext<FormContextType| billingPropType |null>(null);
 
 const initialState = {
     displayName: "",
@@ -93,30 +91,28 @@ const reducer = (state: formPropType, action: actionType) => {
 const FormProvider = ({children}: { children: React.ReactNode }) => {
    
     const [state, dispatch] = useReducer(reducer, initialState)
-    const [monthly, setMonthly] = useState(true)
-    const [yearly, setYearly] = useState(false)
-    const [billingType, setBillingType] = useState({
+    const [monthly, setMonthly] = useState<billingPropType['monthly']>(true)
+    const [yearly, setYearly] = useState<billingPropType['yearly']>(false)
+    const [billingType, setBillingType] = useState<billingPropType['billingType']>({
         type: "Arcade",
         amount: monthly ? 9 : 90
     })
-    const [checked, setChecked] = useState([
-       {status:true,
-        amount: monthly ? 1 : 10,
+
+    const [checked, setChecked] = useState<billingPropType['checked']>([
+        {status: true,
+        amount: monthly? 1 : 10,
         title: "Online service"}, 
-        {status:true,
+        {status: true,
         amount: monthly ? 2 : 20,
         title: "Larger storage"},
-        {status:false,
-        amount: monthly ? 1 : 10,
+        { status: false,
+        amount: monthly ? 2 : 20,
         title: "Customizable profile"}
       ])
 
-    const billing = { monthly, yearly, setMonthly, setYearly, billingType, setBillingType, checked, setChecked}
-    
-
     
     return(
-        <FormContext.Provider value={{state, dispatch, billing}}>
+        <FormContext.Provider value={{state, dispatch,  monthly, yearly, setMonthly, setYearly, billingType, setBillingType, checked, setChecked}}>
             {children}
         </FormContext.Provider>
     )

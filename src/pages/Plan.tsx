@@ -5,8 +5,7 @@ import { FormContext } from "../context"
 
 
 const Plan = () => {
-const {billing} = useContext(FormContext)
-const {monthly, setMonthly, yearly, setYearly, setBillingType} = billing
+const {monthly, setMonthly, yearly, setYearly, setBillingType} = useContext<any>(FormContext)
 const [selected, setSelected] = useState([
   {first: true},
   {second: false},
@@ -22,7 +21,7 @@ const [selected, setSelected] = useState([
         <p className="text-3xl md:text-4xl text-blue-950 font-bold pb-2">Select your plan</p>
             <p className="text-lg md:text-[16px] text-black/40 pb-7 font-medium">You have the option of monthly or yearly billing</p>
 
-            <div className="w-full">
+            <div className="">
             <div className="flex-col flex sm:flex-row gap-5">
               <div className={`w-full sm:w-[9.4rem] h-auto px-5 py-5 border rounded-xl flex sm:flex-col sm:justify-between cursor-pointer gap-5 sm:gap-10 hover:border-purple-900  ${monthly ? "items-center sm:items-start" : "items-start"} ${selected[0].first ? "border-purple-900 bg-blue-50/50" : "border-gray-300 "} transition duration-500 ease-in-out`} onClick={
                 () => {
