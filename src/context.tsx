@@ -5,6 +5,18 @@ type formPropType = {
     errorMsg: string
 }
 
+type billingPropType ={
+    monthly: boolean
+    yearly: boolean
+    billingType: {
+        type: string
+        amount:string
+    }
+    setBillingType: (value: {type:string, amount:string}) => void
+    setMonthly: (value: boolean) => void
+    setYearly: (value: boolean) => void
+}
+
 type actionType =
 | { type: "setName"; payload: string }
 | { type: "setEmail"; payload: string }
@@ -14,11 +26,16 @@ type actionType =
 | { type: "clearEmailErrorMsg" }
 | { type: "clearNumberErrorMsg" };
 
+type FormContextType = {
+    state: formPropType;
+    dispatch: Dispatch<actionType>;
+    billing: billingPropType;
+};
+
+import React, { createContext, useReducer, Dispatch , useState} from "react";
 
 
-import React, { createContext, useReducer, Dispatch } from "react";
-
-const FormContext = createContext<{ state: formPropType; dispatch: Dispatch<actionType> } | null>(null);
+const FormContext = createContext<FormContextType| null>(null);
 
 const initialState = {
     displayName: "",
@@ -68,9 +85,19 @@ const reducer = (state: formPropType, action: actionType) => {
 const FormProvider = ({children}: { children: React.ReactNode }) => {
    
     const [state, dispatch] = useReducer(reducer, initialState)
+    const [monthly, setMonthly] = useState(true)
+    const [yearly, setYearly] = useState(false)
+    const [billingType, setBillingType] = useState({
+        type: "Arcade",
+        amount: "90/yr"
+    })
+
+    const billing = { monthly, yearly, setMonthly, setYearly, billingType, setBillingType}
+    
+
     
     return(
-        <FormContext.Provider value={{state, dispatch}}>
+        <FormContext.Provider value={{state, dispatch, billing}}>
             {children}
         </FormContext.Provider>
     )
