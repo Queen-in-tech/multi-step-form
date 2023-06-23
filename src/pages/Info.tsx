@@ -24,13 +24,13 @@ const Info = () => {
       <SideBar/>
       <div className="absolute top-28 mx-8  md:relative md:top-0 md:mx-0 md:flex md:justify-center md:items-start md:pt-16 md:w-[75vw] shadow-md md:shadow-none">
         <div className="px-7 py-10 rounded-2xl md:px-0 md:py-0 md:rounded-none md:w-[40vw] bg-white lg:w-[45vw]">
-            <p className="text-3xl md:text-4xl text-blue-950 font-bold pb-2">Personal info</p>
+            <p className="text-3xl md:text-4xl text-[#02162e] font-bold pb-2">Personal info</p>
             <p className="text-lg md:text-[16px] text-black/40 pb-10 font-medium">Please provide your name, email address, and phone number.</p>
 
             <form className="flex flex-col gap-7">
                 <div className="flex flex-col">
                 <div className="flex justify-between items-center">
-                <label htmlFor="name" className="pb-1 text-blue-950 font-medium ">Name</label>
+                <label htmlFor="name" className="pb-1 text-[#02162e] font-medium ">Name</label>
                 {state.displayNameError && (
                     <p className="text-red-600 text-sm font-medium md:text-[16px]">{state.displayNameError}</p>
                 )}
@@ -45,7 +45,7 @@ const Info = () => {
 
                 <div className="flex flex-col">
                 <div className="flex justify-between items-center">
-                <label htmlFor="email" className="pb-1 text-blue-950 font-medium">Email Address</label>
+                <label htmlFor="email" className="pb-1 text-[#02162e] font-medium">Email Address</label>
                 {state.emailError && (
                     <p className="text-red-600 text-sm font-medium md:text-[16px]">{state.emailError}</p>
                 )}
@@ -59,7 +59,7 @@ const Info = () => {
 
                 <div className="flex flex-col">
                 <div className="flex justify-between items-center">
-                <label htmlFor="number" className="pb-1 text-blue-950 font-medium">Phone Number</label>
+                <label htmlFor="number" className="pb-1 text-[#02162e] font-medium">Phone Number</label>
                 {state.numberError && (
                     <p className="text-red-600 text-sm font-medium md:text-[16px]">{state.numberError}</p>
                 )}
@@ -72,12 +72,12 @@ const Info = () => {
             </form>
 
             <div className="hidden md:flex justify-end">
-            <button className="bg-blue-950 rounded-md text-white px-8 py-3 md:mt-16 lg:mt-24 hover:opacity-90" onClick={validateForm}>Next Step</button>
+            <button className="bg-[#02162e] rounded-md text-white px-8 py-3 md:mt-16 lg:mt-24 hover:opacity-90" onClick={validateForm}>Next Step</button>
             </div>
         </div>
       </div>
       <div className="bg-white py-5 px-6 flex justify-end md:hidden">
-            <button className="bg-blue-950 rounded-md text-white px-8 py-3 md:mt-16 lg:mt-24 hover:opacity-90" onClick={validateForm}>Next Step</button>
+            <button className="bg-[#02162e] rounded-md text-white px-8 py-3 md:mt-16 lg:mt-24 hover:opacity-90" onClick={validateForm}>Next Step</button>
             </div>
     </div>
   )
