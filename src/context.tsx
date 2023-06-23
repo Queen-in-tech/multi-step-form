@@ -47,7 +47,10 @@ const initialState = {
     displayName: "",
     email: "",
     number: "",
-    errorMsg: ""
+    errorMsg: "",
+    displayNameError: "",
+    emailError: "",
+    numberError: ""  
 }
 
 const reducer = (state: formPropType, action: actionType) => {
@@ -55,11 +58,21 @@ const reducer = (state: formPropType, action: actionType) => {
         case "setName":
             return {...state, displayName: action.payload}
         case "setEmail":
-            return {...state, email: action.payload}
+            return {
+                ...state,
+                email: action.payload,
+            };
         case "setNumber":
-            return {...state, number: action.payload}
+            return {
+                ...state,
+                number: action.payload,
+            };
         case "validateInfo":
             const updatedState = { ...state };
+            const isNumberValid = /^\d+$/.test(state.number);
+            const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email);
+
+
 
             if (state.displayName === "") {
               return {
@@ -70,7 +83,13 @@ const reducer = (state: formPropType, action: actionType) => {
               return { ...updatedState, emailError: "This field is required" };
             } else if (state.number === "") {
               return { ...updatedState,  numberError: "This field is required" };
-            } else{
+            }else if(!isEmailValid){
+                return {...updatedState, emailError: "invalid email"} 
+            }
+            else if(!isNumberValid){
+                return {...updatedState, numberError: "invalid number"} 
+            } 
+            else{
               return{...state}
             }
 
