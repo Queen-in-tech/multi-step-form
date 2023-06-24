@@ -2,7 +2,7 @@ type formPropType = {
     displayName: string
     email: string
     number: string
-    errorMsg: string
+    error: boolean
 }
 
 type billingPropType ={
@@ -47,10 +47,8 @@ const initialState = {
     displayName: "",
     email: "",
     number: "",
-    errorMsg: "",
-    displayNameError: "",
-    emailError: "",
-    numberError: ""  
+    error: true,
+
 }
 
 const reducer = (state: formPropType, action: actionType) => {
@@ -72,25 +70,21 @@ const reducer = (state: formPropType, action: actionType) => {
             const isNumberValid = /^\d+$/.test(state.number);
             const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email);
 
-
-
             if (state.displayName === "") {
               return {
                 ...updatedState,
+                error:true,
                 displayNameError: "This field is required",
               };
-            } else if (state.email === "") {
-              return { ...updatedState, emailError: "This field is required" };
-            } else if (state.number === "") {
-              return { ...updatedState,  numberError: "This field is required" };
-            }else if(!isEmailValid){
-                return {...updatedState, emailError: "invalid email"} 
             }
-            else if(!isNumberValid){
-                return {...updatedState, numberError: "invalid number"} 
+             if (state.email === "" || !isEmailValid) {
+              return { ...updatedState, error:true, emailError: state.email === "" ? "This field is required": !isEmailValid && "Invalid email address"};
             } 
+             if (state.number === "" || !isNumberValid) {
+              return { ...updatedState, error:true, numberError: state.number === "" ? "This field is required": !isNumberValid && "Invalid phone number"};
+            }
             else{
-              return{...state}
+              return{...state, error:false}
             }
 
         case "clearNameErrorMsg":

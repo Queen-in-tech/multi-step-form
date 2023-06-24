@@ -6,17 +6,13 @@ import {useNavigate} from "react-router-dom"
 const Info = () => {
     const {state, dispatch}: any = useContext(FormContext)
     const navigate = useNavigate()
-  
 
     const validateForm = () => {
-        if(state.displayNameError || state.emailError || state.numberError){
         dispatch({type: "validateInfo"})
-        }else{
 
-                navigate("/plan");
-              
+        if(!state.error){
+            navigate("/plan");
         }
-        
     }
 
   return (
@@ -72,7 +68,7 @@ const Info = () => {
             </form>
 
             <div className="hidden md:flex justify-end">
-            <button className="bg-[#02162e] rounded-md text-white px-8 py-3 md:mt-16 lg:mt-24 hover:opacity-90" onClick={validateForm}>Next Step</button>
+            <div className="bg-[#02162e] rounded-md text-white px-8 py-3 md:mt-16 lg:mt-24 hover:opacity-90" onClick={validateForm}>Next Step</div>
             </div>
         </div>
       </div>
